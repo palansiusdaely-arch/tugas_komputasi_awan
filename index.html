@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="id" class="dark scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Profesional | Developer & Designer</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts & FontAwesome CDN -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS Styles -->
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.6);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #4f46e5;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6366f1;
+        }
+
+        /* Glassmorphism utility */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-light {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        /* Typing Effect Cursor Animation */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 0.8s infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* Float Animation */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* Scroll Reveal Animation Classes */
+        .reveal-item {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-item.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-slate-900 text-slate-100 font-sans antialiased selection:bg-indigo-500 selection:text-white transition-colors duration-300 dark:bg-slate-900 dark:text-slate-100 light-theme-target">
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed top-24 right-5 z-50 flex flex-col gap-3 pointer-events-none"></div>
+
+    <!-- Header / Navigasi -->
+    <header class="fixed top-0 left-0 w-full z-40 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#home" class="flex items-center gap-2 group">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition-transform">
+                        P
+                    </div>
+                    <span class="font-bold text-xl tracking-tight text-white dark:text-white light:text-slate-900">
+                        Palan<span class="text-indigo-500">.dev</span>
+                    </span>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav
+                    class="hidden md:flex items-center gap-1 bg-slate-800/60 dark:bg-slate-800/60 light:bg-white/80 backdrop-blur-md px-4 py-2 rounded-full border border-slate-700/50 light:border-slate-200 shadow-sm">
+                    <a href="#home"
+                        class="nav-link px-4 py-2 text-sm font-medium text-indigo-400 hover:text-indigo-400 transition-colors">Beranda</a>
+                    <a href="#about"
+                        class="nav-link px-4 py-2 text-sm font-medium text-slate-300 hover:text-indigo-400 transition-colors">Tentang</a>
+                    <a href="#portfolio"
+                        class="nav-link px-4 py-2 text-sm font-medium text-slate-300 hover:text-indigo-400 transition-colors">Proyek</a>
+                    <a href="#timeline"
+                        class="nav-link px-4 py-2 text-sm font-medium text-slate-300 hover:text-indigo-400 transition-colors">Pengalaman</a>
+                    <a href="#contact"
+                        class="nav-link px-4 py-2 text-sm font-medium text-slate-300 hover:text-indigo-400 transition-colors">Kontak</a>
+                </nav>
+
+                <!-- Actions (Theme Toggle & Mobile Menu Btn) -->
+                <div class="flex items-center gap-3">
+                    <!-- Theme Toggle Button -->
+                    <button id="theme-toggle" aria-label="Ganti Tema"
+                        class="w-10 h-10 rounded-full bg-slate-800 dark:bg-slate-800 light:bg-slate-100 border border-slate-700 dark:border-slate-700 light:border-slate-300 text-slate-300 dark:text-yellow-400 light:text-indigo-600 flex items-center justify-center hover:scale-110 active:scale-95 transition-all">
+                        <i id="theme-toggle-dark-icon" class="fa-solid fa-moon text-lg hidden"></i>
+                        <i id="theme-toggle-light-icon" class="fa-solid fa-sun text-lg"></i>
+                    </button>
+
+                    <!-- CTA Button Desktop -->
+                    <a href="#contact"
+                        class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-full text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-500 shadow-lg shadow-indigo-600/30 hover:shadow-indigo-600/50 hover:-translate-y-0.5 active:translate-y-0 transition-all">
+                        Sapa Saya <i class="fa-solid fa-paper-plane ml-2 text-xs"></i>
+                    </a>
+
+                    <!-- Hamburger Button Mobile -->
+                    <button id="mobile-menu-btn" aria-label="Buka Menu"
+                        class="md:hidden w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 text-slate-300 flex items-center justify-center focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu"
+            class="hidden md:hidden border-b border-slate-800 bg-slate-900/95 backdrop-blur-xl px-4 pt-2 pb-6 space-y-2">
+            <a href="#home"
+                class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-indigo-400 bg-slate-800/50">Beranda</a>
+            <a href="#about"
+                class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">Tentang
+                Saya</a>
+            <a href="#portfolio"
+                class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">Proyek
+                & Portofolio</a>
+            <a href="#timeline"
+                class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">Pengalaman</a>
+            <a href="#contact"
+                class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">Kontak</a>
+            <div class="pt-2">
+                <a href="#contact"
+                    class="w-full flex items-center justify-center px-5 py-3 rounded-xl text-center text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-500 shadow-md">
+                    Hubungi Sekarang
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="overflow-x-hidden">
+        <!-- HERO SECTION -->
+        <section id="home" class="min-h-screen flex items-center justify-center relative pt-24 pb-16 overflow-hidden">
+            <!-- Glow Background Effects -->
+            <div
+                class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-indigo-600/20 rounded-full blur-[120px] pointer-events-none">
+            </div>
+            <div
+                class="absolute bottom-10 right-10 w-[300px] h-[300px] bg-violet-600/15 rounded-full blur-[100px] pointer-events-none">
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+
+                    <!-- Text Content Left -->
+                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left reveal-item active">
+                        <div
+                            class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-sm font-medium">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                            <span>Tersedia untuk Pekerjaan Freelance & Full-time</span>
+                        </div>
+
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+                            Halo, Saya <span
+                                class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-violet-400 to-pink-400">Palansius Daely</span>
+                        </h1>
+
+                        <div
+                            class="text-xl sm:text-2xl text-slate-300 font-medium h-10 flex items-center justify-center lg:justify-start">
+                            <span>Saya seorang&nbsp;</span>
+                            <span id="typing-text" class="text-indigo-400 font-semibold typing-cursor"></span>
+                        </div>
+
+                        <p class="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                            Mengubah ide kompleks menjadi pengalaman digital yang memukau, responsif, dan berkinerja
+                            tinggi. Berfokus pada pengembangan web modern serta desain antarmuka berbasis pengalaman
+                            pengguna.
+                        </p>
+
+                        <!-- CTA Buttons & Social Links -->
+                        <div class="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start pt-4">
+                            <a href="#portfolio"
+                                class="w-full sm:w-auto px-8 py-4 rounded-xl font-semibold text-white bg-indigo-600 hover:bg-indigo-500 shadow-xl shadow-indigo-600/25 hover:shadow-indigo-600/40 hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
+                                <span>Lihat Hasil Karya</span>
+                                <i class="fa-solid fa-arrow-right text-sm"></i>
+                            </a>
+                            <a href="#contact"
+                                class="w-full sm:w-auto px-8 py-4 rounded-xl font-semibold text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-800 border border-slate-700 hover:border-slate-600 transition-all flex items-center justify-center gap-2">
+                                <span>Hubungi Saya</span>
+                            </a>
+                        </div>
+
+                        <!-- Social Media Links -->
+                        <div class="pt-6 flex items-center justify-center lg:justify-start gap-4">
+                            <span class="text-sm text-slate-400 font-medium mr-2">Ikuti Saya:</span>
+                            <a href="#" aria-label="GitHub"
+                                class="w-10 h-10 rounded-lg bg-slate-800/80 hover:bg-indigo-600 border border-slate-700/80 hover:border-indigo-600 text-slate-400 hover:text-white flex items-center justify-center transition-all">
+                                <i class="fa-brands fa-github text-lg"></i>
+                            </a>
+                            <a href="#" aria-label="LinkedIn"
+                                class="w-10 h-10 rounded-lg bg-slate-800/80 hover:bg-indigo-600 border border-slate-700/80 hover:border-indigo-600 text-slate-400 hover:text-white flex items-center justify-center transition-all">
+                                <i class="fa-brands fa-linkedin-in text-lg"></i>
+                            </a>
+                            <a href="#" aria-label="Instagram"
+                                class="w-10 h-10 rounded-lg bg-slate-800/80 hover:bg-indigo-600 border border-slate-700/80 hover:border-indigo-600 text-slate-400 hover:text-white flex items-center justify-center transition-all">
+                                <i class="fa-brands fa-instagram text-lg"></i>
+                            </a>
+                            <a href="#" aria-label="Dribbble"
+                                class="w-10 h-10 rounded-lg bg-slate-800/80 hover:bg-indigo-600 border border-slate-700/80 hover:border-indigo-600 text-slate-400 hover:text-white flex items-center justify-center transition-all">
+                                <i class="fa-brands fa-dribbble text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Hero Visual Right -->
+                    <div class="lg:col-span-5 flex justify-center reveal-item">
+                        <div class="relative w-72 h-72 sm:w-88 sm:h-88 lg:w-96 lg:h-96">
+                            <!-- Outer Rotating Ring -->
+                            <div
+                                class="absolute inset-0 rounded-3xl bg-gradient-to-tr from-indigo-500 to-pink-500 opacity-30 blur-lg animate-pulse">
+                            </div>
+
+                            <!-- Main Avatar Frame -->
+                            <div
+                                class="relative w-full h-full rounded-3xl overflow-hidden border-2 border-slate-700/80 bg-slate-800 shadow-2xl flex items-center justify-center group">
+                                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80"
+                                    alt="Profile Avatar"
+                                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                                    onerror="this.src='https://placehold.co/400x400/1e293b/ffffff?text=Palansius+Daely'">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent">
+                                </div>
+                            </div>
+
+                            <!-- Floating Badge 1 -->
+                            <div
+                                class="absolute -bottom-6 -left-6 glass p-4 rounded-2xl shadow-xl flex items-center gap-3 animate-float">
+                                <div
+                                    class="w-10 h-10 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center">
+                                    <i class="fa-solid fa-code text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400 font-medium">Pengalaman</p>
+                                    <p class="text-sm font-bold text-white">4+ Tahun</p>
+                                </div>
+                            </div>
+
+                            <!-- Floating Badge 2 -->
+                            <div class="absolute -top-6 -right-6 glass p-4 rounded-2xl shadow-xl flex items-center gap-3 animate-float"
+                                style="animation-delay: 2s;">
+                                <div
+                                    class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+                                    <i class="fa-solid fa-circle-check text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400 font-medium">Proyek Selesai</p>
+                                    <p class="text-sm font-bold text-white">35+ Proyek</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about" class="py-24 bg-slate-900/50 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <!-- Section Header -->
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal-item">
+                    <h2 class="text-indigo-400 text-sm font-bold tracking-widest uppercase mb-2">Tentang Saya</h2>
+                    <p class="text-3xl sm:text-4xl font-extrabold text-white">Mengenal Lebih Dekat Alur Kerja & Keahlian
+                        Saya</p>
+                    <div class="w-16 h-1 bg-indigo-600 mx-auto mt-4 rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+
+                    <!-- Bio Content -->
+                    <div class="lg:col-span-6 space-y-6 reveal-item">
+                        <h3 class="text-2xl font-bold text-white">
+                            Saya seorang Frontend Developer & UI/UX Designer yang berdomisili di Indonesia.
+                        </h3>
+                        <p class="text-slate-300 leading-relaxed">
+                            Dengan latar belakang Pendidikan Ilmu Komputer dan pengalaman praktis lebih dari 4 tahun,
+                            saya memiliki passion mendalam dalam membangun aplikasi web modern yang fleksibel, cepat,
+                            serta mudah digunakan.
+                        </p>
+                        <p class="text-slate-400 leading-relaxed">
+                            Prinsip utama saya adalah menulis kode yang bersih (clean code), berfokus pada
+                            aksesibilitas, dan selalu mengutamakan kepuasan pengguna akhir melalui tampilan antarmuka
+                            yang intuitif.
+                        </p>
+
+                        <!-- Key Highlights Grid -->
+                        <div class="grid grid-cols-2 gap-4 pt-2">
+                            <div class="p-4 rounded-xl bg-slate-800/50 border border-slate-700/60">
+                                <i class="fa-solid fa-laptop-code text-indigo-400 text-2xl mb-2"></i>
+                                <h4 class="font-bold text-white mb-1">Pengembangan Web</h4>
+                                <p class="text-xs text-slate-400">React, Vue, Tailwind CSS, Node.js</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-slate-800/50 border border-slate-700/60">
+                                <i class="fa-solid fa-palette text-violet-400 text-2xl mb-2"></i>
+                                <h4 class="font-bold text-white mb-1">UI/UX Design</h4>
+                                <p class="text-xs text-slate-400">Figma, Wireframing, Prototyping</p>
+                            </div>
+                        </div>
+
+                        <div class="pt-4">
+                            <button id="download-cv"
+                                class="px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-medium shadow-md transition-all inline-flex items-center gap-2">
+                                <i class="fa-solid fa-download text-indigo-400"></i>
+                                <span>Unduh Resume / CV</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Progress Skills Bar Right -->
+                    <div class="lg:col-span-6 space-y-6 reveal-item">
+                        <div class="bg-slate-800/40 border border-slate-700/60 p-6 sm:p-8 rounded-2xl space-y-6">
+                            <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                                <i class="fa-solid fa-layer-group text-indigo-400"></i>
+                                <span>Tingkat Keahlian Teknis</span>
+                            </h3>
+
+                            <!-- Skill Item 1 -->
+                            <div class="space-y-2">
+                                <div class="flex justify-between text-sm font-semibold">
+                                    <span class="text-slate-200">HTML5 / CSS3 / Tailwind CSS</span>
+                                    <span class="text-indigo-400">95%</span>
+                                </div>
+                                <div class="w-full h-3 bg-slate-700/60 rounded-full overflow-hidden p-0.5">
+                                    <div class="skill-bar-fill h-full bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full transition-all duration-1000"
+                                        style="width: 0%" data-target="95%"></div>
+                                </div>
+                            </div>
+
+                            <!-- Skill Item 2 -->
+                            <div class="space-y-2">
+                                <div class="flex justify-between text-sm font-semibold">
+                                    <span class="text-slate-200">JavaScript (ES6+) / TypeScript</span>
+                                    <span class="text-indigo-400">90%</span>
+                                </div>
+                                <div class="w-full h-3 bg-slate-700/60 rounded-full overflow-hidden p-0.5">
+                                    <div class="skill-bar-fill h-full bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full transition-all duration-1000"
+                                        style="width: 0%" data-target="90%"></div>
+                                </div>
+                            </div>
+
+                            <!-- Skill Item 3 -->
+                            <div class="space-y-2">
+                                <div class="flex justify-between text-sm font-semibold">
+                                    <span class="text-slate-200">React.js & Next.js</span>
+                                    <span class="text-indigo-400">85%</span>
+                                </div>
+                                <div class="w-full h-3 bg-slate-700/60 rounded-full overflow-hidden p-0.5">
+                                    <div class="skill-bar-fill h-full bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full transition-all duration-1000"
+                                        style="width: 0%" data-target="85%"></div>
+                                </div>
+                            </div>
+
+                            <!-- Skill Item 4 -->
+                            <div class="space-y-2">
+                                <div class="flex justify-between text-sm font-semibold">
+                                    <span class="text-slate-200">Node.js & Express REST API</span>
+                                    <span class="text-indigo-400">80%</span>
+                                </div>
+                                <div class="w-full h-3 bg-slate-700/60 rounded-full overflow-hidden p-0.5">
+                                    <div class="skill-bar-fill h-full bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full transition-all duration-1000"
+                                        style="width: 0%" data-target="80%"></div>
+                                </div>
+                            </div>
+
+                            <!-- Skill Item 5 -->
+                            <div class="space-y-2">
+                                <div class="flex justify-between text-sm font-semibold">
+                                    <span class="text-slate-200">Figma & UI/UX Design System</span>
+                                    <span class="text-indigo-400">88%</span>
+                                </div>
+                                <div class="w-full h-3 bg-slate-700/60 rounded-full overflow-hidden p-0.5">
+                                    <div class="skill-bar-fill h-full bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full transition-all duration-1000"
+                                        style="width: 0%" data-target="88%"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- PORTFOLIO SECTION -->
+        <section id="portfolio" class="py-24 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <!-- Section Header -->
+                <div class="text-center max-w-3xl mx-auto mb-12 reveal-item">
+                    <h2 class="text-indigo-400 text-sm font-bold tracking-widest uppercase mb-2">Portofolio</h2>
+                    <p class="text-3xl sm:text-4xl font-extrabold text-white">Proyek Terbaru & Karya Pilihan</p>
+                    <div class="w-16 h-1 bg-indigo-600 mx-auto mt-4 rounded-full"></div>
+                </div>
+
+                <!-- Filter Categories -->
+                <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-4 mb-12 reveal-item">
+                    <button
+                        class="filter-btn active px-5 py-2.5 rounded-full text-sm font-medium transition-all bg-indigo-600 text-white shadow-lg shadow-indigo-600/30"
+                        data-filter="all">
+                        Semua Proyek
+                    </button>
+                    <button
+                        class="filter-btn px-5 py-2.5 rounded-full text-sm font-medium transition-all bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white border border-slate-700"
+                        data-filter="web">
+                        Web Dev
+                    </button>
+                    <button
+                        class="filter-btn px-5 py-2.5 rounded-full text-sm font-medium transition-all bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white border border-slate-700"
+                        data-filter="uiux">
+                        UI/UX Design
+                    </button>
+                    <button
+                        class="filter-btn px-5 py-2.5 rounded-full text-sm font-medium transition-all bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white border border-slate-700"
+                        data-filter="app">
+                        Aplikasi Mobile
+                    </button>
+                </div>
+
+                <!-- Projects Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-container">
+
+                    <!-- Card 1 -->
+                    <div class="project-card reveal-item group bg-slate-800/50 border border-slate-700/60 rounded-2xl overflow-hidden hover:border-indigo-500/50 transition-all duration-300 flex flex-col"
+                        data-category="web">
+                        <div class="relative overflow-hidden aspect-video">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80"
+                                alt="Dashboard Analytics"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                onerror="this.src='https://placehold.co/600x400/1e293b/ffffff?text=Dashboard+E-Commerce'">
+                            <div
+                                class="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
+                                <button onclick="openModal(1)"
+                                    class="w-11 h-11 rounded-full bg-indigo-600 text-white flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
+                                    title="Lihat Detail">
+                                    <i class="fa-solid fa-eye text-base"></i>
+                                </button>
+                                <a href="#" target="_blank"
+                                    class="w-11 h-11 rounded-full bg-slate-800 text-white flex items-center justify-center hover:scale-110 transition-transform border border-slate-600"
+                                    title="Live Preview">
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-base"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <span class="text-xs font-semibold text-indigo-400 uppercase tracking-wider">Web
+                                    Development</span>
+                                <h3
+                                    class="text-xl font-bold text-white mt-1 group-hover:text-indigo-400 transition-colors">
+                                    E-Commerce SaaS Dashboard</h3>
+                                <p class="text-slate-400 text-sm mt-2 line-clamp-2">Platform analisis penjualan
+                                    real-time dengan integrasi gateway pembayaran mutakhir.</p>
+                            </div>
+                            <div class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-700/50">
+                                <span
+                                    class="px-2.5 py-1 text-xs rounded-md bg-slate-700/50 text-slate-300 font-medium">React</span>
+                                <span
+                                    class="px-2.5 py-1 text-xs rounded-md bg-slate-700/50 text-slate-300 font-medium">Tailwind
+                                    CSS</span>
+                                <span
+                                    class="px-2.5 py-1 text-xs rounded-md bg-slate-700/50 text-slate-300 font-medium">Chart.js</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="project-card reveal-item group bg-slate-800/50 border border-slate-700/60 rounded-2xl overflow-hidden hover:border-indigo-500/50 transition-all duration-300 flex flex-col"
+                        data-category="uiux">
+                        <div class="relative overflow-hidden aspect-video">
+                            <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80"
+                                alt="Financial Mobile App"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                onerror="this.src='https://placehold.co/600x400/1e293b/ffffff?text=Finance+App+UI'">
+                            <div
+                                class="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
+                                <button onclick="openModal(2)"
+                                    class="w-11 h-11 rounded-full bg-indigo-600 text-white flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
+                                    title="Lihat Detail">
+                                    <i class="fa-solid fa-eye text-base"></i>
+                                </button>
+                                <a href="#" target="_blank"
+                                    class="w-11 h-11 rounded-full bg-slate-800 text-white flex items-center justify-center hover:scale-110 transition-transform border border-slate-600"
+                                    title="Live Preview">
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-base"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <span class="text-xs font-semibold text-violet-400 uppercase tracking-wider">UI/UX
+                                    Design</span>
+                                <h3
+                                    class="text-xl font-bold text-white mt-1 group-hover:text-indigo-400 transition-colors">
+                                    FinTech Wallet Concept</h3>
+                                <p class="text-slate-400 text-sm mt-2 line-clamp-2">Desain antarmuka dompet digital
+                                    minimalis yang mengutamakan kecepatan transaksi mikro.</p>
+                            </div>
+                            <div class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-700/50">
+                                <span
+                                    class="px-2.5 py-1 text-xs rounded-md bg-slate-700/50 text-slate-300 font-medium">Figma</span>
+                                <span
+                                    class="px-2.5 py-1 text-xs rounded-md bg-slate-700/50 text-slate-300 font-medium">Prototyping</span>
+                                <span
+                                    class="px-2.5 py-1 text-xs rounded-md bg-slate-700/50 text-slate-300 font-medium">Design
+                                    System</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="project-card reveal-item group bg-slate-800/50 border border-slate-700/60 rounded-2xl overflow-hidden hover:border-indigo-500/50 transition-all duration-300 flex flex-col"
+                        data-category="app">
+                        <div class="relative overflow-hidden aspect-video">
+                            <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=80"
+                                alt="Mobile App"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                onerror="this.src='https://placehold.co/600x400/1e293b/ffffff?text=AI+Mobile+App'">
+                            <div
+                                class="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
+                                <button onclick="openModal(3)"
+                                    class="w-11 h-11 rounded-full bg-indigo-600 text-white flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
+                                    title="Lihat Detail">
+                                    <i class="fa-solid fa-eye text-base"></i>
+                                </button>
+                                <a href="#" target="_blank"
+                                    class="w-11 h-11 rounded-full bg-slate-800 text-white flex items-center justify-center hover:scale-110 transition-transform border border-slate-600"
+                                    title="Live Preview">
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-base"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <span class="text-xs font-semibold text-emerald-400 uppercase tracking-wider">Aplikasi
+                                    Mobile</span>
+                                <h3
+                                    class="text-xl font-bold text-white mt-1 group-hover:text-indigo-400 transition-colors">
+                                    AI Content Generator App</h3>
+                                <p class="text-slate-400 text-sm mt-2 line-clamp-2">Aplikasi mobile cerdas pendamping
+                                    pembuat konten berbasis model AI generatif.</p>
+                            </div>
+                            <div class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-700/50">
+                                <span
+                                    class="px-2.5 py-1 text-xs rounded-md bg-slate-700/50 text-slate-300 font-medium">React
+                                    Native</span>
+                                <span
+                                    class="px-2.5 py-1 text-xs rounded-md bg-slate-700/50 text-slate-300 font-medium">OpenAI
+                                    API</span>
+                                <span
+                                    class="px-2.5 py-1 text-xs rounded-md bg-slate-700/50 text-slate-300 font-medium">Redux</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="project-card reveal-item group bg-slate-800/50 border border-slate-700/60 rounded-2xl overflow-hidden hover:border-indigo-500/50 transition-all duration-300 flex flex-col"
+                        data-category="web">
+                        <div class="relative overflow-hidden aspect-video">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80"
+                                alt="SEO Landing Page"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                onerror="this.src='https://placehold.co/600x400/1e293b/ffffff?text=Landing+Page'">
+                            <div
+                                class="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
+                                <button onclick="openModal(4)"
+                                    class="w-11 h-11 rounded-full bg-indigo-600 text-white flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
+                                    title="Lihat Detail">
+                                    <i class="fa-solid fa-eye text-base"></i>
+                                </button>
+                                <a href="#" target="_blank"
+                                    class="w-11 h-11 rounded-full bg-slate-800 text-white flex items-center justify-center hover:scale-110 transition-transform border border-slate-600"
+                                    title="Live Preview">
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-base"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <span class="text-xs font-semibold text-indigo-400 uppercase tracking-wider">Web
+                                    Development</span>
+                                <h3
+                                    class="text-xl font-bold text-white mt-1 group-hover:text-indigo-400 transition-colors">
+                                    Corporate Agency Portal</h3>
+                                <p class="text-slate-400 text-sm mt-2 line-clamp-2">Website korporat modern dengan SEO
+                                    tinggi, kecepatan optimasi 99+ di Google Lighthouse.</p>
+                            </div>
+                            <div class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-700/50">
+                                <span
+                                    class="px-2.5 py-1 text-xs rounded-md bg-slate-700/50 text-slate-300 font-medium">Next.js</span>
+                                <span
+                                    class="px-2.5 py-1 text-xs rounded-md bg-slate-700/50 text-slate-300 font-medium">Framer
+                                    Motion</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="project-card reveal-item group bg-slate-800/50 border border-slate-700/60 rounded-2xl overflow-hidden hover:border-indigo-500/50 transition-all duration-300 flex flex-col"
+                        data-category="app">
+                        <div class="relative overflow-hidden aspect-video">
+                            <img src="https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=800&q=80"
+                                alt="Task App"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                onerror="this.src='https://placehold.co/600x400/1e293b/ffffff?text=Task+Manager'">
+                            <div
+                                class="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
+                                <button onclick="openModal(5)"
+                                    class="w-11 h-11 rounded-full bg-indigo-600 text-white flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
+                                    title="Lihat Detail">
+                                    <i class="fa-solid fa-eye text-base"></i>
+                                </button>
+                                <a href="#" target="_blank"
+                                    class="w-11 h-11 rounded-full bg-slate-800 text-white flex items-center justify-center hover:scale-110 transition-transform border border-slate-600"
+                                    title="Live Preview">
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-base"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <span class="text-xs font-semibold text-emerald-400 uppercase tracking-wider">Aplikasi
+                                    Mobile</span>
+                                <h3
+                                    class="text-xl font-bold text-white mt-1 group-hover:text-indigo-400 transition-colors">
+                                    Task Productivity Suite</h3>
+                                <p class="text-slate-400 text-sm mt-2 line-clamp-2">Manajemen tugas kolaboratif tim
+                                    dengan sinkronisasi awan dan pengingat waktu otomatis.</p>
+                            </div>
+                            <div class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-700/50">
+                                <span
+                                    class="px-2.5 py-1 text-xs rounded-md bg-slate-700/50 text-slate-300 font-medium">Flutter</span>
+                                <span
+                                    class="px-2.5 py-1 text-xs rounded-md bg-slate-700/50 text-slate-300 font-medium">Firebase</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 6 -->
+                    <div class="project-card reveal-item group bg-slate-800/50 border border-slate-700/60 rounded-2xl overflow-hidden hover:border-indigo-500/50 transition-all duration-300 flex flex-col"
+                        data-category="uiux">
+                        <div class="relative overflow-hidden aspect-video">
+                            <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80"
+                                alt="Design System"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                onerror="this.src='https://placehold.co/600x400/1e293b/ffffff?text=Design+System'">
+                            <div
+                                class="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
+                                <button onclick="openModal(6)"
+                                    class="w-11 h-11 rounded-full bg-indigo-600 text-white flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
+                                    title="Lihat Detail">
+                                    <i class="fa-solid fa-eye text-base"></i>
+                                </button>
+                                <a href="#" target="_blank"
+                                    class="w-11 h-11 rounded-full bg-slate-800 text-white flex items-center justify-center hover:scale-110 transition-transform border border-slate-600"
+                                    title="Live Preview">
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-base"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <span class="text-xs font-semibold text-violet-400 uppercase tracking-wider">UI/UX
+                                    Design</span>
+                                <h3
+                                    class="text-xl font-bold text-white mt-1 group-hover:text-indigo-400 transition-colors">
+                                    Enterprise Design System</h3>
+                                <p class="text-slate-400 text-sm mt-2 line-clamp-2">Pustaka komponen UI siap pakai untuk
+                                    meningkatkan konsistensi produk antar-platform.</p>
+                            </div>
+                            <div class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-700/50">
+                                <span
+                                    class="px-2.5 py-1 text-xs rounded-md bg-slate-700/50 text-slate-300 font-medium">Figma
+                                    Tokens</span>
+                                <span
+                                    class="px-2.5 py-1 text-xs rounded-md bg-slate-700/50 text-slate-300 font-medium">Storybook</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- TIMELINE SECTION (Pengalaman & Pendidikan) -->
+        <section id="timeline" class="py-24 bg-slate-900/50 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal-item">
+                    <h2 class="text-indigo-400 text-sm font-bold tracking-widest uppercase mb-2">Jejak Karir</h2>
+                    <p class="text-3xl sm:text-4xl font-extrabold text-white">Pengalaman & Pendidikan</p>
+                    <div class="w-16 h-1 bg-indigo-600 mx-auto mt-4 rounded-full"></div>
+                </div>
+
+                <div class="max-w-4xl mx-auto relative">
+                    <!-- Vertical Line -->
+                    <div class="absolute left-4 sm:left-1/2 top-0 bottom-0 w-0.5 bg-slate-700/80 -translate-x-1/2">
+                    </div>
+
+                    <!-- Timeline Item 1 -->
+                    <div class="relative flex flex-col sm:flex-row items-start mb-12 group reveal-item">
+                        <div class="sm:w-1/2 sm:pr-10 text-left sm:text-right pl-12 sm:pl-0 mb-2 sm:mb-0">
+                            <span
+                                class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 mb-2">2022
+                                - Sekarang</span>
+                            <h3 class="text-lg font-bold text-white">Senior Frontend Developer</h3>
+                            <h4 class="text-sm font-medium text-slate-400">PT Tech Inovasi Digital</h4>
+                        </div>
+                        <div
+                            class="absolute left-4 sm:left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-slate-800 border-2 border-indigo-500 text-indigo-400 flex items-center justify-center z-10 group-hover:scale-125 group-hover:bg-indigo-600 group-hover:text-white transition-all shadow-lg">
+                            <i class="fa-solid fa-briefcase text-xs"></i>
+                        </div>
+                        <div class="sm:w-1/2 sm:pl-10 pl-12">
+                            <div class="p-5 rounded-xl bg-slate-800/60 border border-slate-700/60">
+                                <p class="text-sm text-slate-300">Memimpin tim frontend dalam pengembangan aplikasi SaaS
+                                    skala besar menggunakan React dan Next.js, meningkatkan performa sistem sebesar 40%.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Item 2 -->
+                    <div class="relative flex flex-col sm:flex-row items-start mb-12 group reveal-item">
+                        <div
+                            class="sm:w-1/2 sm:pr-10 text-left sm:text-right pl-12 sm:pl-0 mb-2 sm:mb-0 sm:order-1 order-1">
+                            <!-- Left block empty for alternating mobile view logic or balanced design -->
+                            <div class="hidden sm:block p-5 rounded-xl bg-slate-800/60 border border-slate-700/60">
+                                <p class="text-sm text-slate-300">Merancang wireframe, antarmuka pengguna, serta
+                                    prototipe interaktif untuk lebih dari 15 klien bisnis lokal dan internasional.</p>
+                            </div>
+                        </div>
+                        <div
+                            class="absolute left-4 sm:left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-slate-800 border-2 border-violet-500 text-violet-400 flex items-center justify-center z-10 group-hover:scale-125 group-hover:bg-violet-600 group-hover:text-white transition-all shadow-lg">
+                            <i class="fa-solid fa-compass-drafting text-xs"></i>
+                        </div>
+                        <div class="sm:w-1/2 sm:pl-10 pl-12 sm:order-2 order-2">
+                            <span
+                                class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-violet-500/10 text-violet-400 border border-violet-500/20 mb-2">2020
+                                - 2022</span>
+                            <h3 class="text-lg font-bold text-white">UI/UX & Web Developer</h3>
+                            <h4 class="text-sm font-medium text-slate-400">Creative Studio Nusantara</h4>
+                            <div class="sm:hidden p-5 rounded-xl bg-slate-800/60 border border-slate-700/60 mt-2">
+                                <p class="text-sm text-slate-300">Merancang wireframe, antarmuka pengguna, serta
+                                    prototipe interaktif untuk lebih dari 15 klien bisnis lokal dan internasional.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Item 3 -->
+                    <div class="relative flex flex-col sm:flex-row items-start group reveal-item">
+                        <div class="sm:w-1/2 sm:pr-10 text-left sm:text-right pl-12 sm:pl-0 mb-2 sm:mb-0">
+                            <span
+                                class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-2">2024
+                                - 2029</span>
+                            <h3 class="text-lg font-bold text-white">S1 Prodi Informatika</h3>
+                            <h4 class="text-sm font-medium text-slate-400">Universitas Satya Terra Bhinneka</h4>
+                        </div>
+                        <div
+                            class="absolute left-4 sm:left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-slate-800 border-2 border-emerald-500 text-emerald-400 flex items-center justify-center z-10 group-hover:scale-125 group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-lg">
+                            <i class="fa-solid fa-graduation-cap text-xs"></i>
+                        </div>
+                        <div class="sm:w-1/2 sm:pl-10 pl-12">
+                            <div class="p-5 rounded-xl bg-slate-800/60 border border-slate-700/60">
+                                <p class="text-sm text-slate-300">Lulus dengan predikat Cum Laude. Berfokus pada
+                                    Rekayasa Perangkat Lunak dan Interaksi Manusia & Komputer (HCI).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="py-24 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal-item">
+                    <h2 class="text-indigo-400 text-sm font-bold tracking-widest uppercase mb-2">Hubungi Saya</h2>
+                    <p class="text-3xl sm:text-4xl font-extrabold text-white">Mari Bekerja Sama</p>
+                    <div class="w-16 h-1 bg-indigo-600 mx-auto mt-4 rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+
+                    <!-- Contact Info Left -->
+                    <div class="lg:col-span-5 space-y-6 reveal-item">
+                        <h3 class="text-2xl font-bold text-white mb-4">Ada proyek atau pertanyaan?</h3>
+                        <p class="text-slate-400 leading-relaxed">
+                            Jangan ragu untuk menghubungi saya melalui formulir di samping atau kontak langsung di
+                            bawah. Saya selalu terbuka untuk diskusi kolaborasi proyek baru.
+                        </p>
+
+                        <div class="space-y-4 pt-4">
+                            <!-- Card Email -->
+                            <div
+                                class="flex items-center gap-4 p-4 rounded-xl bg-slate-800/40 border border-slate-700/60">
+                                <div
+                                    class="w-12 h-12 rounded-lg bg-indigo-600/20 text-indigo-400 flex items-center justify-center text-xl shrink-0">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400 font-medium">Email Utama</p>
+                                    <a href="mailto:palansiusdaely@gmail.com"
+                                        class="text-sm font-semibold text-white hover:text-indigo-400 transition-colors">palansiusdaely@gmail.com</a>
+                                </div>
+                            </div>
+
+                            <!-- Card Phone/WA -->
+                            <div
+                                class="flex items-center gap-4 p-4 rounded-xl bg-slate-800/40 border border-slate-700/60">
+                                <div
+                                    class="w-12 h-12 rounded-lg bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-xl shrink-0">
+                                    <i class="fa-solid fa-phone"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400 font-medium">WhatsApp / Telepon</p>
+                                    <a href="tel:+6285360085828"
+                                        class="text-sm font-semibold text-white hover:text-emerald-400 transition-colors">+62
+                                        853-6008-5828</a>
+                                </div>
+                            </div>
+
+                            <!-- Card Location -->
+                            <div
+                                class="flex items-center gap-4 p-4 rounded-xl bg-slate-800/40 border border-slate-700/60">
+                                <div
+                                    class="w-12 h-12 rounded-lg bg-violet-600/20 text-violet-400 flex items-center justify-center text-xl shrink-0">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400 font-medium">Lokasi</p>
+                                    <p class="text-sm font-semibold text-white">Medan, Indonesia</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form Right -->
+                    <div class="lg:col-span-7 reveal-item">
+                        <form id="contact-form"
+                            class="bg-slate-800/40 border border-slate-700/60 p-6 sm:p-8 rounded-2xl space-y-5"
+                            novalidate>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <!-- Name Input -->
+                                <div>
+                                    <label for="name" class="block text-sm font-medium text-slate-300 mb-2">Nama Lengkap
+                                        *</label>
+                                    <input type="text" id="name" name="name" placeholder="John Doe"
+                                        class="w-full px-4 py-3 rounded-xl bg-slate-900/60 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all">
+                                    <span class="error-msg text-xs text-rose-500 mt-1 hidden" id="error-name">Nama wajib
+                                        diisi.</span>
+                                </div>
+
+                                <!-- Email Input -->
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-slate-300 mb-2">Alamat
+                                        Email *</label>
+                                    <input type="email" id="email" name="email" placeholder="john@example.com"
+                                        class="w-full px-4 py-3 rounded-xl bg-slate-900/60 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all">
+                                    <span class="error-msg text-xs text-rose-500 mt-1 hidden" id="error-email">Email
+                                        tidak valid.</span>
+                                </div>
+                            </div>
+
+                            <!-- Subject Input -->
+                            <div>
+                                <label for="subject" class="block text-sm font-medium text-slate-300 mb-2">Subjek Pesan
+                                    *</label>
+                                <input type="text" id="subject" name="subject" placeholder="Diskusi Proyek Baru"
+                                    class="w-full px-4 py-3 rounded-xl bg-slate-900/60 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all">
+                                <span class="error-msg text-xs text-rose-500 mt-1 hidden" id="error-subject">Subjek
+                                    wajib diisi.</span>
+                            </div>
+
+                            <!-- Message Input -->
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-slate-300 mb-2">Pesan Anda
+                                    *</label>
+                                <textarea id="message" name="message" rows="5"
+                                    placeholder="Tuliskan detail proyek atau pertanyaan Anda di sini..."
+                                    class="w-full px-4 py-3 rounded-xl bg-slate-900/60 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all resize-none"></textarea>
+                                <span class="error-msg text-xs text-rose-500 mt-1 hidden" id="error-message">Pesan
+                                    minimal 10 karakter.</span>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button type="submit" id="submit-btn"
+                                class="w-full py-4 rounded-xl font-semibold text-white bg-indigo-600 hover:bg-indigo-500 shadow-xl shadow-indigo-600/30 hover:shadow-indigo-600/50 transition-all flex items-center justify-center gap-2">
+                                <span>Kirim Pesan</span>
+                                <i class="fa-solid fa-paper-plane text-sm"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-800 bg-slate-950/80 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+                <div>
+                    <a href="#home" class="font-bold text-lg text-white">Palan<span
+                            class="text-indigo-500">.dev</span></a>
+                    <p class="text-xs text-slate-400 mt-1">© <span id="current-year"></span> Palansius Daely. Hak Cipta
+                        Dilindungi.</p>
+                </div>
+                <div class="flex items-center gap-4 text-slate-400 text-sm">
+                    <a href="#home" class="hover:text-indigo-400 transition-colors">Beranda</a>
+                    <span>•</span>
+                    <a href="#about" class="hover:text-indigo-400 transition-colors">Tentang</a>
+                    <span>•</span>
+                    <a href="#portfolio" class="hover:text-indigo-400 transition-colors">Proyek</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- PROJECT DETAIL MODAL -->
+    <div id="project-modal"
+        class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-slate-900 border border-slate-700/80 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 relative shadow-2xl scale-95 transition-transform duration-300"
+            id="modal-box">
+
+            <!-- Close Modal Button -->
+            <button onclick="closeModal()" aria-label="Tutup"
+                class="absolute top-4 right-4 w-10 h-10 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <!-- Dynamic Modal Content Header -->
+            <div id="modal-content">
+                <span id="modal-category"
+                    class="text-xs font-semibold text-indigo-400 uppercase tracking-wider">Kategori</span>
+                <h3 id="modal-title" class="text-2xl font-bold text-white mt-1 mb-4">Judul Proyek</h3>
+
+                <div class="aspect-video rounded-xl overflow-hidden mb-6 border border-slate-700">
+                    <img id="modal-image" src="" alt="Modal Project Image" class="w-full h-full object-cover">
+                </div>
+
+                <div class="space-y-4 text-slate-300 text-sm leading-relaxed">
+                    <p id="modal-description">Deskripsi lengkap proyek akan ditampilkan di sini secara dinamis.</p>
+
+                    <div class="grid grid-cols-2 gap-4 py-3 border-y border-slate-800 my-4">
+                        <div>
+                            <span class="block text-xs text-slate-400">Klien / Industri</span>
+                            <span id="modal-client" class="font-semibold text-white">Startup Tech</span>
+                        </div>
+                        <div>
+                            <span class="block text-xs text-slate-400">Waktu Pengerjaan</span>
+                            <span id="modal-timeline" class="font-semibold text-white">3 Minggu</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-semibold text-white mb-2">Teknologi Digunakan:</h4>
+                        <div id="modal-tech-stack" class="flex flex-wrap gap-2">
+                            <!-- Dynamic Badges -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex justify-end gap-3">
+                    <button onclick="closeModal()"
+                        class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium text-sm transition-colors">
+                        Tutup
+                    </button>
+                    <a id="modal-live-link" href="#" target="_blank"
+                        class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm shadow-lg shadow-indigo-600/30 transition-all flex items-center gap-2">
+                        <span>Buka Live Demo</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT CODE -->
+    <script>
+        // Data Proyek Lengkap untuk Modal
+        const projectsData = {
+            1: {
+                title: "E-Commerce SaaS Dashboard",
+                category: "Web Development",
+                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+                description: "Platform analitik dashboard e-commerce terpadu yang membantu pemilik toko online memantau tren penjualan secara real-time, mengelola stok barang, dan memprediksi pendapatan bulanan berbasis grafik visual interaktif.",
+                client: "PT Retail Solusindo",
+                timeline: "1 Bulan",
+                tech: ["React.js", "Tailwind CSS", "Chart.js", "REST API"],
+                link: "#"
+            },
+            2: {
+                title: "FinTech Wallet Concept",
+                category: "UI/UX Design",
+                image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80",
+                description: "Rancangan antarmuka aplikasi dompet digital modern yang menyederhanakan proses transfer uang mikro, pembayaran QRIS, dan pemantauan pengeluaran harian dengan visualisasi dompet yang intuitif.",
+                client: "Bank Finansial Digital",
+                timeline: "2 Minggu",
+                tech: ["Figma", "User Testing", "Interactive Prototype"],
+                link: "#"
+            },
+            3: {
+                title: "AI Content Generator App",
+                category: "Aplikasi Mobile",
+                image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=80",
+                description: "Aplikasi mobile cerdas berbasis iOS & Android yang memanfaatkan teknologi Generative AI untuk membantu copywriter dan kreator konten menghasilkan ide tulisan serta gambar dalam hitungan detik.",
+                client: "Global Creator Labs",
+                timeline: "2 Bulan",
+                tech: ["React Native", "OpenAI API", "Redux Toolkit", "Node.js"],
+                link: "#"
+            },
+            4: {
+                title: "Corporate Agency Portal",
+                category: "Web Development",
+                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
+                description: "Website portal perusahaan agensi kreatif dengan performa tinggi, animasi smooth, serta optimasi SEO terbaik untuk menarik calon klien korporat secara global.",
+                client: "Nexus Digital Agency",
+                timeline: "3 Minggu",
+                tech: ["Next.js", "Tailwind CSS", "Framer Motion"],
+                link: "#"
+            },
+            5: {
+                title: "Task Productivity Suite",
+                category: "Aplikasi Mobile",
+                image: "https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=800&q=80",
+                description: "Aplikasi manajemen proyek tim secara lintas platform yang memungkinkan alokasi tugas mudah, pengingat tenggat waktu otomatis, serta papan Kanban interaktif.",
+                client: "Productive Inc.",
+                timeline: "1.5 Bulan",
+                tech: ["Flutter", "Firebase", "Cloud Functions"],
+                link: "#"
+            },
+            6: {
+                title: "Enterprise Design System",
+                category: "UI/UX Design",
+                image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80",
+                description: "Sistem desain komprehensif yang mencakup pedoman gaya warna, tipografi, serta puluhan komponen UI siap pakai untuk menyelaraskan desain produk di seluruh ekosistem perusahaan.",
+                client: "PT Mega Tech Enterprise",
+                timeline: "1 Bulan",
+                tech: ["Figma Tokens", "Documentation", "Storybook"],
+                link: "#"
+            }
+        };
+
+        // --- 1. DARK / LIGHT THEME TOGGLE LOGIC ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+        const htmlElement = document.documentElement;
+
+        // Check local storage or preference
+        if (localStorage.getItem('color-theme') === 'light' || (!('color-theme' in localStorage) && window.matchMedia(
+                '(prefers-color-scheme: light)').matches)) {
+            enableLightTheme();
+        } else {
+            enableDarkTheme();
+        }
+
+        function enableLightTheme() {
+            htmlElement.classList.remove('dark');
+            darkIcon.classList.remove('hidden');
+            lightIcon.classList.add('hidden');
+            localStorage.setItem('color-theme', 'light');
+        }
+
+        function enableDarkTheme() {
+            htmlElement.classList.add('dark');
+            lightIcon.classList.remove('hidden');
+            darkIcon.classList.add('hidden');
+            localStorage.setItem('color-theme', 'dark');
+        }
+
+        themeToggleBtn.addEventListener('click', function () {
+            if (htmlElement.classList.contains('dark')) {
+                enableLightTheme();
+            } else {
+                enableDarkTheme();
+            }
+        });
+
+        // --- 2. MOBILE MENU TOGGLE ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            if (mobileMenu.classList.contains('hidden')) {
+                menuIcon.className = 'fa-solid fa-bars text-xl';
+            } else {
+                menuIcon.className = 'fa-solid fa-xmark text-xl';
+            }
+        });
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.className = 'fa-solid fa-bars text-xl';
+            });
+        });
+
+        // --- 3. TYPING EFFECT IN HERO SECTION ---
+        const typingTextElement = document.getElementById('typing-text');
+        const roles = ["Full Stack Web Developer", "UI/UX Designer", "Creative Problem Solver", "Frontend Specialist"];
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeEffect() {
+            const currentRole = roles[roleIndex];
+
+            if (isDeleting) {
+                typingTextElement.textContent = currentRole.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingTextElement.textContent = currentRole.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 40 : 80;
+
+            if (!isDeleting && charIndex === currentRole.length) {
+                typeSpeed = 2000; // Pause at end of word
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+                typeSpeed = 400; // Pause before typing next word
+            }
+
+            setTimeout(typeEffect, typeSpeed);
+        }
+
+        document.addEventListener('DOMContentLoaded', typeEffect);
+
+        // --- 4. PORTFOLIO CATEGORY FILTERING ---
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    b.classList.remove('active', 'bg-indigo-600', 'text-white', 'shadow-lg',
+                        'shadow-indigo-600/30');
+                    b.classList.add('bg-slate-800', 'text-slate-300');
+                });
+                btn.classList.add('active', 'bg-indigo-600', 'text-white', 'shadow-lg',
+                    'shadow-indigo-600/30');
+                btn.classList.remove('bg-slate-800', 'text-slate-300');
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                projectCards.forEach(card => {
+                    if (filterValue === 'all' || card.getAttribute('data-category') ===
+                        filterValue) {
+                        card.style.display = 'flex';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'scale(1)';
+                        }, 50);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // --- 5. PROJECT DETAIL MODAL ---
+        const modal = document.getElementById('project-modal');
+        const modalBox = document.getElementById('modal-box');
+
+        function openModal(projectId) {
+            const data = projectsData[projectId];
+            if (!data) return;
+
+            document.getElementById('modal-category').textContent = data.category;
+            document.getElementById('modal-title').textContent = data.title;
+            document.getElementById('modal-image').src = data.image;
+            document.getElementById('modal-description').textContent = data.description;
+            document.getElementById('modal-client').textContent = data.client;
+            document.getElementById('modal-timeline').textContent = data.timeline;
+            document.getElementById('modal-live-link').href = data.link;
+
+            const techContainer = document.getElementById('modal-tech-stack');
+            techContainer.innerHTML = '';
+            data.tech.forEach(t => {
+                const badge = document.createElement('span');
+                badge.className =
+                    'px-3 py-1 text-xs rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 font-medium';
+                badge.textContent = t;
+                techContainer.appendChild(badge);
+            });
+
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modalBox.classList.remove('scale-95');
+            modalBox.classList.add('scale-100');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modalBox.classList.remove('scale-100');
+            modalBox.classList.add('scale-95');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on click outside box
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // --- 6. SCROLL REVEAL & SKILL PROGRESS ANIMATION ---
+        const revealItems = document.querySelectorAll('.reveal-item');
+        const skillBars = document.querySelectorAll('.skill-bar-fill');
+
+        function checkScroll() {
+            const triggerBottom = window.innerHeight * 0.85;
+
+            revealItems.forEach(item => {
+                const itemTop = item.getBoundingClientRect().top;
+                if (itemTop < triggerBottom) {
+                    item.classList.add('active');
+                }
+            });
+
+            // Animate Skill Bars when About section is in view
+            skillBars.forEach(bar => {
+                const barTop = bar.getBoundingClientRect().top;
+                if (barTop < triggerBottom) {
+                    const targetWidth = bar.getAttribute('data-target');
+                    bar.style.width = targetWidth;
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkScroll);
+        window.addEventListener('load', checkScroll);
+
+        // --- 7. CONTACT FORM VALIDATION & CUSTOM TOAST ---
+        const contactForm = document.getElementById('contact-form');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            let isValid = true;
+
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const subjectInput = document.getElementById('subject');
+            const messageInput = document.getElementById('message');
+
+            const errorName = document.getElementById('error-name');
+            const errorEmail = document.getElementById('error-email');
+            const errorSubject = document.getElementById('error-subject');
+            const errorMessage = document.getElementById('error-message');
+
+            // Name validation
+            if (nameInput.value.trim() === '') {
+                errorName.classList.remove('hidden');
+                nameInput.classList.add('border-rose-500');
+                isValid = false;
+            } else {
+                errorName.classList.add('hidden');
+                nameInput.classList.remove('border-rose-500');
+            }
+
+            // Email validation regex
+            const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+            if (!emailInput.value.trim().match(emailPattern)) {
+                errorEmail.classList.remove('hidden');
+                emailInput.classList.add('border-rose-500');
+                isValid = false;
+            } else {
+                errorEmail.classList.add('hidden');
+                emailInput.classList.remove('border-rose-500');
+            }
+
+            // Subject validation
+            if (subjectInput.value.trim() === '') {
+                errorSubject.classList.remove('hidden');
+                subjectInput.classList.add('border-rose-500');
+                isValid = false;
+            } else {
+                errorSubject.classList.add('hidden');
+                subjectInput.classList.remove('border-rose-500');
+            }
+
+            // Message validation
+            if (messageInput.value.trim().length < 10) {
+                errorMessage.classList.remove('hidden');
+                messageInput.classList.add('border-rose-500');
+                isValid = false;
+            } else {
+                errorMessage.classList.add('hidden');
+                messageInput.classList.remove('border-rose-500');
+            }
+
+            if (isValid) {
+                const submitBtn = document.getElementById('submit-btn');
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> Memproses...`;
+
+                setTimeout(() => {
+                    showToast("Pesan Berhasil Terkirim! Terima kasih telah menghubungi.", "success");
+                    contactForm.reset();
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML =
+                        `<span>Kirim Pesan</span> <i class="fa-solid fa-paper-plane text-sm"></i>`;
+                }, 1200);
+            }
+        });
+
+        // Toast Notification System
+        function showToast(msg, type = "success") {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `pointer-events-auto flex items-center gap-3 px-5 py-4 rounded-xl shadow-2xl text-white text-sm font-medium border transition-all duration-300 transform translate-x-full ${
+                type === 'success' ? 'bg-emerald-600 border-emerald-500' : 'bg-rose-600 border-rose-500'
+            }`;
+
+            toast.innerHTML = `
+                <i class="fa-solid ${type === 'success' ? 'fa-circle-check' : 'fa-circle-exclamation'} text-lg"></i>
+                <span>${msg}</span>
+            `;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('translate-x-full');
+            }, 50);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-x-full');
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+
+        // CV Download Button Simulation
+        document.getElementById('download-cv').addEventListener('click', () => {
+            showToast("Mengunduh CV Palansius Daely (PDF)...", "success");
+        });
+
+        // Set Current Year in Footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Navbar shadow transition on scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-slate-900/90', 'backdrop-blur-md', 'shadow-lg');
+            } else {
+                navbar.classList.remove('bg-slate-900/90', 'backdrop-blur-md', 'shadow-lg');
+            }
+        });
+    </script>
+</body>
+
+</html>
